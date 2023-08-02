@@ -17,7 +17,6 @@ class LabeledImage:
             for y in range(self.height):
                 if sum(self.pix[x, y]) != 765:
                     self.pix_array.append((x, y))
-
         return (self.pix_array[0][0], self.pix_array[0][1] // 3), (self.pix_array[-1][0], self.pix_array[-1][1] * 1.45)
 
     def draw(self):
