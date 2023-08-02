@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw
+from flask import Flask, request
 
 
 class LabeledImage:
@@ -7,6 +8,7 @@ class LabeledImage:
         self.image_name = image_path
         self.width = self.image.size[0]
         self.height = self.image.size[1]
+        self.label = Label
         self.pix = self.image.load()
         self.pix_array = list()
 
@@ -15,6 +17,7 @@ class LabeledImage:
             for y in range(self.height):
                 if sum(self.pix[x, y]) != 765:
                     self.pix_array.append((x, y))
+
         return (self.pix_array[0][0], self.pix_array[0][1] // 3), (self.pix_array[-1][0], self.pix_array[-1][1] * 1.45)
 
     def draw(self):
