@@ -1,14 +1,22 @@
-from yolotrainer import LabeledImage
+from yolotrainer import  LabeledImageFactory
 import sys
+from flask import Flask
+
+app = Flask(__name__)
 
 
-class LabeledImageFactory:
-    @staticmethod
-    def generate_labeled_image(file_path, Label=None):
-        return LabeledImage(file_path)
+class YoloBoxBackend:
+    @app.route('/1')
+    def upload_labeled_image(self, params):
+        return f'<h1>OK<h1>'
 
 
 path = sys.stdin.readline().strip()
-test = LabeledImageFactory.generate_labeled_image(path)
-print(test.detect_Bounding_Coordinates())
-test.draw()
+color = sum(map(int, input().split()))
+test = LabeledImageFactory.generate_labeled_image(path, color)
+test1 = YoloBoxBackend()
+test1.upload_labeled_image(test.upload_to_server('localhost', 3000))
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
